@@ -4,6 +4,12 @@ import NotFound from './NotFound';
 import '../index.css';
 
 class PhotoContainer extends Component {
+    constructor() {
+        super();
+        this.state = {
+            photo: ''
+        }
+    }
     render() {
         return (
             <div className="photo-container">

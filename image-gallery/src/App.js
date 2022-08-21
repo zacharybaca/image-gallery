@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Switch
+} from 'react-router-dom';
+
 import './index.css';
 import Form from './components/Form';
 import PhotoContainer from './components/PhotoContainer';
@@ -12,17 +19,28 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      photo: ''
-    }
+      pics: [],
+      cats: [],
+      dogs: [],
+      birds: [],
+      query: '',
+      loading: true
+    };
   }
+
+  
   render() {
     return (
-      <div className="container">
-        <Form />
-        <Nav />
-        <PhotoContainer />
-        <NotFound />
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <Form />
+          <Nav />
+          <Routes>
+            <PhotoContainer />
+            <NotFound />
+          </Routes>
+        </div>
+      </BrowserRouter>
     );
   }
   

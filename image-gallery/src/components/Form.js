@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PhotoContainer from './PhotoContainer';
-import Nav from './Nav';
 import '../index.css';
 
 
@@ -8,12 +6,11 @@ class Form extends Component {
     constructor() {
         super();
         this.state = {
-
+            input: ''
         }
     }
     render() {
         return (
-            <div>
                 <form className="search-form">
                     <input type="search" name="search" placeholder="Search" required/>
                     <button type="submit" class="search-button">
@@ -23,9 +20,6 @@ class Form extends Component {
                         </svg>
                     </button>
                 </form>
-                <Nav />
-                <PhotoContainer />
-           </div>
     )}
 }
 

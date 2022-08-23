@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Routes
+  Switch
 } from 'react-router-dom';
 
 import './index.css';
@@ -74,14 +74,14 @@ class App extends Component {
         <div className="container">
           <Form search={this.search}/>
           <Nav />
-          <Routes>
-            <Route exact path="/" element={<PhotoContainer data={this.state.pics} /> } />
-            <Route path="/cats" element={<PhotoContainer data={this.state.cats} />} />
-            <Route path="/dogs" element={<PhotoContainer data={this.state.dogs} />} />
-            <Route path="/birds" element={<PhotoContainer data={this.state.birds} />} />
-            <Route path="/:query" element={<PhotoContainer data={this.state.pics} query={this.state.query} search={this.search} />} />
-            <Route element={ NotFound } />
-          </Routes>
+          <Switch>
+            <Route exact path="/" render={() => <PhotoContainer data={this.state.pics} /> } />
+            <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} />} />
+            <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} />} />
+            <Route path="/birds" render={() => <PhotoContainer data={this.state.birds} />} />
+            <Route path="/:query" render={() => <PhotoContainer data={this.state.pics} query={this.state.query} search={this.search} />} />
+            <Route render={ NotFound } />
+          </Switch>
         </div>
       </BrowserRouter>
     );

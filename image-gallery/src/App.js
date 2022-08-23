@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Routes,
-  Switch
+  Routes
 } from 'react-router-dom';
 
 import './index.css';
@@ -28,16 +27,60 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.search('cats');
+    this.search('dogs');
+    this.search('birds');
+    this.search(this.state.query);
+  }
+
+  search = (query) => {
+    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.photos.photo)
+      if(query === 'cats') {
+        this.setState({
+          cats: data.photos.photo,
+          loading: false
+        });
+      } else if(query === 'dogs') {
+        this.setState({
+          dogs: data.photos.photo,
+          loading: false
+        });
+      } else if(query === 'birds'){
+        this.setState({
+          birds: data.photos.photo,
+          loading: false
+        });
+      } else {
+        this.setState({
+          pics: data.photos.photo,
+          query: query,
+          loading: false
+        });
+      }
+    })
+    .catch(error => {
+      console.log('An Error Occurred', error);
+    });
+  }
+
   
   render() {
     return (
       <BrowserRouter>
         <div className="container">
-          <Form />
+          <Form search={this.search}/>
           <Nav />
           <Routes>
-            <PhotoContainer />
-            <NotFound />
+            <Route exact path="/" element={<PhotoContainer data={this.state.pics} /> } />
+            <Route path="/cats" element={<PhotoContainer data={this.state.cats} />} />
+            <Route path="/dogs" element={<PhotoContainer data={this.state.dogs} />} />
+            <Route path="/birds" element={<PhotoContainer data={this.state.birds} />} />
+            <Route path="/:query" element={<PhotoContainer data={this.state.pics} query={this.state.query} search={this.search} />} />
+            <Route element={ NotFound } />
           </Routes>
         </div>
       </BrowserRouter>

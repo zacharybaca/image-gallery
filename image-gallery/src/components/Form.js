@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../index.css';
 
 
+
+
 class Form extends Component {
+    
     state = {
         searchText: ''
     }
@@ -13,12 +17,14 @@ class Form extends Component {
         });
     }
 
+    
     handleSubmit = (e) => {
         e.preventDefault();
+        let history = useHistory();
         this.props.search(this.state.searchText);
         e.currentTarget.reset();
         let searchPath = `/${this.state.searchText}`;
-        this.props.history.push(searchPath);
+        history(searchPath);
         
     }
     render() {

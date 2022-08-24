@@ -15,10 +15,11 @@ class Form extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        let searchPath = `/${this.state.searchText}`;
         this.props.search(this.state.searchText);
-        this.props.history.push(searchPath);
         e.currentTarget.reset();
+        let searchPath = `/${this.state.searchText}`;
+        this.props.history.push(searchPath);
+        
     }
     render() {
         return (

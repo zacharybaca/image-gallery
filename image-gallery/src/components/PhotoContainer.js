@@ -12,7 +12,7 @@ const PhotoContainer = (props) => {
         const { query } = useParams();
 
         if (props.query !== query) {
-            props.performSearch(query);
+            props.search(query);
         }
 
         if (results.length > 0) {

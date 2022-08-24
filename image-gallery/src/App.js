@@ -75,11 +75,11 @@ class App extends Component {
           <Form search={this.search}/>
           <Nav />
           <Switch>
-            <Route exact path="/" render={() => <PhotoContainer data={this.state.pics} /> } />
             <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} />} />
             <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} />} />
             <Route path="/birds" render={() => <PhotoContainer data={this.state.birds} />} />
             <Route path="/:query" render={() => <PhotoContainer data={this.state.pics} query={this.state.query} search={this.search} />} />
+            <Route exact path="/" render={() => <PhotoContainer data={this.state.pics} /> } />
             <Route render={ NotFound } />
           </Switch>
         </div>

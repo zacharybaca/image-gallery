@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import '../index.css';
 
 
@@ -20,11 +20,10 @@ class Form extends Component {
     
     handleSubmit = (e) => {
         e.preventDefault();
-        let history = useHistory();
         this.props.search(this.state.searchText);
         e.currentTarget.reset();
         let searchPath = `/${this.state.searchText}`;
-        history(searchPath);
+        this.props.history.push(searchPath);
         
     }
     render() {
@@ -42,4 +41,4 @@ class Form extends Component {
 }
 
 
-export default Form;
+export default withRouter(Form);

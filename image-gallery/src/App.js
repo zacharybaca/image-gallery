@@ -28,13 +28,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.search();
     this.search('cats');
     this.search('dogs');
     this.search('birds');
-    this.search(this.state.query);
   }
 
-  search = (query) => {
+  search = (query = "elephants") => {
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(res => res.json())
     .then(data => {
